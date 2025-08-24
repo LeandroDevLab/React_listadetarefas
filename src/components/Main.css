@@ -53,6 +53,12 @@
   transition: all 500ms ease-in-out;
 }
 
+.tarefas li span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .tarefas li:hover {
   background: #51c5de;
 }
