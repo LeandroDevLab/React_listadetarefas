@@ -28,13 +28,12 @@
 }
 
 .form button[type="submit"] {
-  display: flex;
+  display: grid; /* com FLEX buga o FaEdit e outros */
   justify-content: center;
   align-items: center;
   border: none;
   width: 40px;
   height: 40px;
-  background: #f04c64;
   color: #fff;
   font-size: 20px;
   font-weight: 900;
@@ -54,7 +53,6 @@
 }
 
 .tarefas li span {
-  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -75,4 +73,11 @@
 .tarefas li:hover .edit,
 .tarefas li:hover .delete {
   color: #000;
+}
+
+.button_blue {
+  background: #51c5de;
+}
+.button_red {
+  background: #f04c64;
 }
