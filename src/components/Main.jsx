@@ -22,18 +22,36 @@ export default class Main extends Component {
     //VALIDAÇÕES
     //if (tarefas.indexOf(novaTarefa) !== -1) return;
     if (tarefas.includes(novaTarefa)) return;
-    if (novaTarefa === "") return;
+    if (novaTarefa === "") {
+      return;
+    }
 
     const novasTarefas = [...tarefas];
 
     this.setState({
       tarefas: [...novasTarefas, novaTarefa],
     });
+    focus(".input_notaTarefa");
   };
 
   handleChange = (e) => {
     this.setState({
       novaTarefa: e.target.value,
+    });
+  };
+
+  handleEdit = (e, index) => {
+    console.log("Edit", index);
+  };
+
+  handleDelete = (e, index) => {
+    const { tarefas } = this.state;
+    const novasTarefas = [...tarefas];
+    novasTarefas.splice(index, 1);
+    console.log("Delete", index);
+
+    this.setState({
+      tarefas: [...novasTarefas],
     });
   };
 
@@ -58,11 +76,17 @@ export default class Main extends Component {
         <ul className="tarefas">
           {tarefas.map((tarefa, index) => (
             // atribuindo um key único, o próprio index
-            <li key={index}>
+            <li key={tarefa}>
               {tarefa}
               <span>
-                <FaEdit className="edit" />
-                <FaWindowClose className="delete" />
+                <FaEdit
+                  onClick={(e) => this.handleEdit(e, index)}
+                  className="edit"
+                />
+                <FaWindowClose
+                  onClick={(e) => this.handleDelete(e, index)}
+                  className="delete"
+                />
               </span>
             </li>
           ))}
