@@ -1,0 +1,33 @@
+.form {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form .input_novaTarefa {
+  height: 40px;
+  padding: 0 20px;
+  font-size: 20px;
+  border: 1px solid #ccc;
+  min-width: 80%;
+}
+
+.form button[type="submit"] {
+  display: grid; /* com FLEX buga o FaEdit e outros */
+  justify-content: center;
+  align-items: center;
+  border: none;
+  width: 40px;
+  height: 40px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.button_blue {
+  background: #51c5de;
+}
+.button_red {
+  background: #f04c64;
+}

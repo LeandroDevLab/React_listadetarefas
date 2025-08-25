@@ -1,8 +1,8 @@
 //Usando Component para seguir exemplo do professor
 import React, { Component, createRef } from "react";
 
-//Form
-import { FaPlus, FaEdit, FaWindowClose } from "react-icons/fa";
+import Form from "./Form";
+import Tarefas from "./Tarefas";
 
 import "./Main.css";
 
@@ -116,39 +116,19 @@ export default class Main extends Component {
       <div className="main">
         <h1>Lista de Tarefas</h1>
 
-        <form onSubmit={this.handleSubmit} action="#" className="form">
-          <input
-            ref={this.inputRef}
-            onChange={this.handleChange}
-            className="input_novaTarefa"
-            type="text"
-            value={novaTarefa}
-            name="novaTarefa"
-          />
-          <button className={buttonClass} type="submit">
-            {/* O estilo muda com base na classe 'buttonClass' */}
-            {isEditing ? <FaEdit /> : <FaPlus />}
-          </button>
-        </form>
-
-        <ul className="tarefas">
-          {tarefas.map((tarefa, index) => (
-            // atribuindo um key único, o próprio index
-            <li key={tarefa + index}>
-              {tarefa}
-              <span>
-                <FaEdit
-                  onClick={(e) => this.handleEdit(e, index)}
-                  className="edit"
-                />
-                <FaWindowClose
-                  onClick={(e) => this.handleDelete(e, index)}
-                  className="delete"
-                />
-              </span>
-            </li>
-          ))}
-        </ul>
+        <Form
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+          inputRef={this.inputRef}
+          buttonClass={buttonClass} // this já foi chamado no const {destructuring} = this.state
+          isEditing={isEditing} // this já foi chamado no const {destructuring} = this.state
+          novaTarefa={novaTarefa} // this já foi chamado no const {destructuring} = this.state
+        />
+        <Tarefas
+          tarefas={tarefas}
+          handleEdit={this.handleEdit}
+          handleDelete={this.handleDelete}
+        />
       </div>
     );
   }
