@@ -18,6 +18,32 @@ export default class Main extends Component {
     isEditing: false, // NOVO: Estado para mudar o estilo do botão
   };
 
+  //Executado imediatamente após ser montado (ou renderização)
+  componentDidMount() {
+    const tarefas = JSON.parse(localStorage.getItem("tarefas"));
+
+    if (!tarefas) return; // (se não tiver para aqui) seria tipo o vanila setar tarefas se houver || ''
+
+    this.setState({ tarefas });
+  }
+
+  //Assiste atualização do componente em tempo real
+  componentDidUpdate(prevProps, prevState) {
+    //console.log(prevState.novaTarefa); // teste só com esse console e comente o restante abaixo
+    const { tarefas } = this.state;
+
+    if (tarefas === prevState.tarefas) return; // ESSENCIAL para evitar loop infinito (dependendo do código)
+
+    localStorage.setItem("tarefas", JSON.stringify(tarefas));
+  }
+
+  inputFocus() {
+    //INPUT FOCUS -> verifica e aplica o foco
+    if (this.inputRef.current) {
+      this.inputRef.current.focus();
+    }
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     const { tarefas, index } = this.state;
@@ -48,10 +74,7 @@ export default class Main extends Component {
       });
     }
 
-    //INPUT FOCUS
-    if (this.inputRef.current) {
-      this.inputRef.current.focus();
-    }
+    this.inputFocus();
   };
 
   handleChange = (e) => {
@@ -69,12 +92,7 @@ export default class Main extends Component {
         novaTarefa: tarefas[index],
         isEditing: true, // Define o estado para mudar o estilo do botão
       },
-      () => {
-        // 2. Foca o input após a atualização do estado
-        if (this.inputRef.current) {
-          this.inputRef.current.focus();
-        }
-      }
+      this.inputFocus()
     );
   };
 
